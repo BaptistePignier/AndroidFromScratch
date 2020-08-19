@@ -1,8 +1,12 @@
 #!/bin/bash
 export PATH=$PATH:$ANDROID_HOME/build-tools/29.0.3
 
-SeeTemporaryFolder=false
-Storepass=Pa$$wRd
+SeeTemporaryFolder=true
+Storepass=Passwrd
+
+rm -fr obj
+rm -fr bin
+rm -fr gen
 
 if [ ! -f MainKeystore.keystore ]; then
     echo "Lets generate a keystore to sign your apk : "
@@ -26,21 +30,30 @@ for i in libs/*.jar; do
   dxlibs="$dxlibs $i"
   d8libs="$d8libs --classpath $i"
 done
-libs="${libs#:}"
-all_java=$(find src gen -type f -name '*.java') #Find all R.java (from lib and src) and .java files
 
-echo "JAVAC"
+libs="${libs#:}"
+all_R_java=$(find gen -type f -name '*.java') #Find all R.java (from lib and src) and .java files
+all_kotlin=$(find src -type f -name '*.kt')
+all_code_java=$(find src -type f -name '*.java')
+
 mkdir -p obj
-javac -bootclasspath android.jar -d obj/ -classpath $libs -sourcepath src:gen $all_java
+echo "JAVAC"
+javac -bootclasspath android.jar -d obj/ -classpath $libs -sourcepath gen:src $all_R_java $all_code_java
+
+
+if [ ! -z $all_kotlin ] ; then
+	echo "KOTLIN"
+	/opt/kotlinc/bin/kotlinc $all_kotlin $all_R_java -classpath $libs:android.jar -include-runtime -d obj/com/pignier/app/
+fi
 
 if ! $SeeTemporaryFolder ; then
 	rm -fr gen/
 fi
 
 echo "D8"
+jar cf obj/all.jar obj/
 
-all_class_file=$(find obj -type f) #Find all .class files generate by previous command
-d8 --release $d8libs --lib android.jar --output bin/ $all_class_file $dxlibs
+d8 --release $d8libs --lib android.jar --output bin/ obj/all.jar $dxlibs
 
 if ! $SeeTemporaryFolder ; then
 	rm -fr obj/
