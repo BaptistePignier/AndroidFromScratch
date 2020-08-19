@@ -1,6 +1,7 @@
 # AndroidFromScratch
 How to build an android app without gradle/ant/maven ? Use script !
 You can use this project as template for your app !
+This project support java and kotlin code. An example kotlin file is provided in kotlin folder. If you whant to use kotlin, you need to set kotlinc command in your PATH as it explain [here](https://turreta.com/2017/05/22/kotlin-compile-and-run-from-windows-command-line/)
 
 ## Get the project
 - Clone this repo : 

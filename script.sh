@@ -1,5 +1,8 @@
 #!/bin/bash
+
+#Replace by your own if needed
 export PATH=$PATH:$ANDROID_HOME/build-tools/29.0.3
+export PATH=$PATH:/opt/kotlinc/bin/
 
 SeeTemporaryFolder=true
 Storepass=Passwrd
@@ -43,7 +46,7 @@ javac -bootclasspath android.jar -d obj/ -classpath $libs -sourcepath gen:src $a
 
 if [ ! -z $all_kotlin ] ; then
 	echo "KOTLIN"
-	/opt/kotlinc/bin/kotlinc $all_kotlin $all_R_java -classpath $libs:android.jar -include-runtime -d obj/com/pignier/app/
+	kotlinc $all_kotlin $all_R_java -classpath $libs:android.jar -include-runtime -d obj/com/pignier/app/
 fi
 
 if ! $SeeTemporaryFolder ; then
