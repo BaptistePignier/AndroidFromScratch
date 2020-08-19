@@ -32,6 +32,7 @@ Temporary folder are create and remove during the process. To see these folder a
 The process is explain [here](https://stackoverflow.com/questions/41132753/how-can-i-build-an-android-apk-without-gradle-on-the-command-line)<br>
 [aapt2](https://developer.android.com/studio/command-line/aapt2) : compile and like all resources and AndroidManifest to make R.java file and a first version of final apk<br>
 [javac](https://docs.oracle.com/javase/7/docs/technotes/tools/windows/javac.html) : compile all .java files into .class file.<br>
+[kotlinc](https://kotlinlang.org/docs/reference/compiler-reference.html) : compile all .kotlin into .class file.<br>
 [d8](https://developer.android.com/studio/command-line/d8) : compile all .class and android.jar to make classes.dex file which is android bytecode executable by the [DVM](https://fr.wikipedia.org/wiki/Dalvik_(machine_virtuelle))<br>
 [zip](http://infozip.sourceforge.net/Zip.html) : add classes.dex to the previous apk<br>
 [zipalign](https://developer.android.com/studio/command-line/zipalign) : optimize the apk<br>
