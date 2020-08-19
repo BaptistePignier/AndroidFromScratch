@@ -4,7 +4,6 @@
     android:versionName="2.0">
     <uses-sdk android:targetSdkVersion="29"/>
     <application 
-        android:icon="@drawable/mylogo"
         android:label="@string/myApplicationName"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">

@@ -1,0 +1,4 @@
+<resources>
+    <string name="myApplicationName">AndroidFromScratch</string>
+    <string name="Text">Hello World</string>
+</resources>
