@@ -50,7 +50,7 @@ javac -bootclasspath android.jar -d obj/ -classpath $libs -sourcepath gen:src $a
 
 if [ ! -z $all_kotlin ] ; then
 	echo "KOTLIN"
-	kotlinc $all_kotlin $all_R_java -classpath $libs:android.jar -include-runtime -d obj/com/pignier/app/
+	kotlinc $all_kotlin $all_R_java -classpath $libs:android.jar -include-runtime -d obj/com/example/app/
 fi
 
 if ! $SeeTemporaryFolder ; then

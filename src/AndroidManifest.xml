@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.pignier.app"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.app"
     android:versionCode="20"
     android:versionName="2.0">
     <uses-sdk android:targetSdkVersion="29"/>

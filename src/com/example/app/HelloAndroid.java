@@ -1,4 +1,4 @@
-package com.pignier.app;
+package com.example.app;
 
 import android.app.Activity;
 import android.os.Bundle;
