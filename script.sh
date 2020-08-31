@@ -4,7 +4,7 @@
 export PATH=$PATH:$ANDROID_HOME/build-tools/29.0.3
 export PATH=$PATH:/opt/kotlinc/bin/
 
-SeeTemporaryFolder=false
+SeeTemporaryFolder=true
 
 #Change if you whant but it's pointless
 Storepass=Passwrd
@@ -23,21 +23,24 @@ fi
 echo "AAPT2"
 mkdir -p gen bin
 aapt2 compile -v --dir res/ -o res/res.zip
-aapt2 compile -v --dir libs/constraint-layout-1.1.3-res -o libs/constraint-layout-1.1.3-res.zip
-aapt2 link -v -I android.jar -R libs/constraint-layout-1.1.3-res.zip --auto-add-overlay --manifest src/AndroidManifest.xml --java gen/ --extra-packages android.support.constraint -o bin/AndroidTest.unsigned.unalign.apk res/res.zip 
-
-
-if ! $SeeTemporaryFolder ; then
-	rm -f libs/constraint-layout-1.1.3-res.zip
-fi
+#aapt2 compile -v --dir libs/constraint-layout-1.1.3-res -o libs/constraint-layout-1.1.3-res.zip
+aapt2 link -v -I android.jar  --auto-add-overlay --manifest src/AndroidManifest.xml --java gen/ -o bin/AndroidTest.unsigned.unalign.apk res/res.zip 
+#-R libs/constraint-layout-1.1.3-res.zip
 
 #Find all usefull files
-for i in libs/*.jar; do
-  libs="$libs:$i"
-  dxlibs="$dxlibs $i"
-  d8libs="$d8libs --classpath $i"
-done
-libs="${libs#:}"
+thereislibs=$(find libs -type f -name '*.jar')
+if [ ! -z  $thereislibs ]; then
+	echo "aaaaaaa"
+	for i in libs/*.jar; do
+		echo $i
+		libs="$libs:$i"
+		dxlibs="$dxlibs $i"
+		d8libs="$d8libs --classpath $i"
+	done
+	libs="${libs#:}"
+fi
+
+
 all_R_java=$(find gen -type f -name '*.java') #Find all R.java (from lib and src) and .java files
 all_kotlin=$(find src -type f -name '*.kt')
 all_code_java=$(find src -type f -name '*.java')
@@ -45,10 +48,15 @@ all_code_java=$(find src -type f -name '*.java')
 
 echo "JAVAC"
 mkdir -p obj
-javac -bootclasspath android.jar -d obj/ -classpath $libs -sourcepath gen:src $all_R_java $all_code_java
+if [ ! -z  $thereislibs ]; then
+	javac -bootclasspath android.jar -d obj/ -classpath $libs -sourcepath gen:src $all_R_java $all_code_java
+else 
+	javac -bootclasspath android.jar -d obj/ -sourcepath gen:src $all_R_java $all_code_java
+fi
 
 
-if [ ! -z $all_kotlin ] ; then
+echo $all_kotlin
+if [ ! -z "$all_kotlin" ] ; then
 	echo "KOTLIN"
 	kotlinc $all_kotlin $all_R_java -classpath $libs:android.jar -include-runtime -d obj/com/example/app/
 fi
@@ -59,6 +67,7 @@ fi
 
 echo "D8"
 jar cf obj/all.jar obj/
+
 d8 --release $d8libs --lib android.jar --output bin/ obj/all.jar $dxlibs
 
 if ! $SeeTemporaryFolder ; then
