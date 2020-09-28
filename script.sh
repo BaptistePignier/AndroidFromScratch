@@ -25,8 +25,6 @@ mkdir -p gen bin
 aapt2 compile -v --dir res/ -o res/res.zip
 aapt2 compile -v --dir libs/constraint-layout-1.1.3-res -o libs/constraint-layout-1.1.3-res.zip
 aapt2 link -v -I android.jar -R libs/constraint-layout-1.1.3-res.zip  --auto-add-overlay --manifest src/AndroidManifest.xml --java gen/ --extra-packages android.support.constraint -o bin/AndroidTest.unsigned.unalign.apk res/res.zip 
-#
-#
 
 #Find all usefull files
 thereislibs=$(find libs -type f -name '*.jar')
@@ -38,7 +36,6 @@ if [ ! -z "thereislibs" ]; then
 	done
 	libs="${libs#:}"
 fi
-
 
 all_R_java=$(find gen -type f -name '*.java') #Find all R.java (from lib and src) and .java files
 all_kotlin=$(find src -type f -name '*.kt')
