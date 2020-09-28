@@ -38,4 +38,9 @@ The process is explain [here](https://stackoverflow.com/questions/41132753/how-c
 [zipalign](https://developer.android.com/studio/command-line/zipalign) : optimize the apk<br>
 [apksigner](https://developer.android.com/studio/command-line/apksigner) : sign the apk<br>
 
+## Credit 
+
+I was inspired by [this](https://github.com/HemanthJabalpuri/AndroidExplorer/blob/master/build_new.sh) for the compil script
+S/o Stackoverflow :)
+
 
