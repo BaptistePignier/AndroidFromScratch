@@ -40,7 +40,7 @@ The process is explain [here](https://stackoverflow.com/questions/41132753/how-c
 
 ## Credit 
 
-I was inspired by [this](https://github.com/HemanthJabalpuri/AndroidExplorer/blob/master/build_new.sh) for the compil script
+I was inspired by [this](https://github.com/HemanthJabalpuri/AndroidExplorer/blob/master/build_new.sh) for the compil script<br>
 S/o Stackoverflow :)
 
 
