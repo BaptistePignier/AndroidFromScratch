@@ -41,7 +41,7 @@ The process is explain [here](https://stackoverflow.com/questions/41132753/how-c
 ## Credit 
 
 I was inspired by [this](https://github.com/HemanthJabalpuri/AndroidExplorer/blob/master/build_new.sh) for the compil script<br>
-This [picture](https://blog.octo.com/wp-content/uploads/2017/10/compilation-android.png) is also pretty nice
+This [picture](https://blog.octo.com/wp-content/uploads/2017/10/compilation-android.png) is also pretty nice<br>
 S/o Stackoverflow :)
 
 
